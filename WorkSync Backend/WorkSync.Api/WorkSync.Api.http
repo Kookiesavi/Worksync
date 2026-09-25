@@ -1,0 +1,6 @@
+@WorkSync.Api_HostAddress = http://localhost:5142
+
+GET {{WorkSync.Api_HostAddress}}/api/employee/1
+Accept: application/json
+
+###
