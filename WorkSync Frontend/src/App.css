@@ -167,7 +167,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;
@@ -181,4 +181,52 @@
     right: 0;
     border-right-color: var(--border);
   }
+}
+
+.employee-list {
+  text-align: left;
+  width: 80%;
+  margin: 0 auto;
+}
+.employee-list ul {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 0;
+}
+.employee-card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 15px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+.dashboard-cards {
+  display: flex;
+  gap: 50px;
+  width: 80%;
+  margin: 30px auto;
+}
+.dashboard-card {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--shadow);
+  text-align: left;
+}
+
+.dashboard-card h3 {
+  margin: 0 0 10px;
+}
+
+.dashboard-card p {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
 }

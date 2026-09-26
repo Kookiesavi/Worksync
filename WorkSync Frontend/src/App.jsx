@@ -1,18 +1,30 @@
 import { useEffect, useState } from "react";
 import { getallEmployees, getallTeams } from "./Api/apiService";
+import "./App.css";
+import AdminDashboard from "./Pages/AdminDashboard";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AdminEmployees from "./Pages/AdminEmployees";
+import AdminTeams from "./Pages/AdminTeams";
+import AdminProjects from "./Pages/AdminProjects";
+import AdminLeaves from "./Pages/AdminLeaves";
+import AdminNavbar from "./Components/AdminNavbar";
 
 function App() {
   const [employeeCount, setEmployeeCount] = useState(0);
   const [teamCount, setTeamCount] = useState(0);
+  const [employees, setEmployees] = useState([]);
 
   useEffect(() => {
     getallEmployees().then((data) => {
       setEmployeeCount(data.length);
+      setEmployees(data);
+      console.log("Employees data fetched:", data);
     });
   }, []);
   useEffect(() => {
     getallTeams().then((data) => {
       setTeamCount(data.length);
+      console.log("Teams data fetched:", data);
     });
   }, []);
 
@@ -21,20 +33,44 @@ function App() {
   }, []);
 
   return (
-    <div>
-      <h1>Worksync</h1>
-      <p>Employee And Team Management System</p>
+    <BrowserRouter>
+      <AdminNavbar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AdminDashboard
+              employeeCount={employeeCount}
+              teamCount={teamCount}
+            />
+          }
+        />
+        <Route path="/employees" element={<AdminEmployees />} />
+        <Route path="/teams" element={<AdminTeams />} />
+        <Route path="/projects" element={<AdminProjects />} />
+        <Route path="/leaves" element={<AdminLeaves />} />
+      </Routes>
+    </BrowserRouter>
 
-      <h2> DashBoard </h2>
+    // <div>
+    //   <AdminDashboard employeeCount={employeeCount} teamCount={teamCount} />
 
-      {/* <button onClick={() => setEmployeeCount(employeeCount + 1)}>
-        Add Employee
-      </button> */}
-
-      <p>Total Employee Count: {employeeCount}</p>
-      {/* <button onClick={() => setTeamCount(teamCount + 1)}>Add Team</button> */}
-      <p>Total Team Count: {teamCount}</p>
-    </div>
+    //   <div className="employee-list">
+    //     <h3>Employee List:</h3>
+    //     <ul>
+    //       {employees.map((employee) => (
+    //         <li key={employee.id} className="employee-card">
+    //           <strong>
+    //             {employee.firstName} {employee.lastName}
+    //           </strong>
+    //           <span>{employee.designation}</span>
+    //           <span>{employee.department}</span>
+    //           <span>{employee.email}</span>
+    //         </li>
+    //       ))}
+    //     </ul>
+    //   </div>
+    // </div>
   );
 }
 
