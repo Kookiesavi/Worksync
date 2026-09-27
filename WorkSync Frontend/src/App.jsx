@@ -8,6 +8,7 @@ import AdminTeams from "./Pages/AdminTeams";
 import AdminProjects from "./Pages/AdminProjects";
 import AdminLeaves from "./Pages/AdminLeaves";
 import AdminNavbar from "./Components/AdminNavbar";
+import AdminHearder from "./Components/AdminHeader";
 
 function App() {
   const [employeeCount, setEmployeeCount] = useState(0);
@@ -34,22 +35,29 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AdminNavbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AdminDashboard
-              employeeCount={employeeCount}
-              teamCount={teamCount}
+      <div className="admin-layout">
+        <AdminNavbar />
+        <main className="admin-content">
+          <AdminHearder />
+
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <AdminDashboard
+                  employeeCount={employeeCount}
+                  teamCount={teamCount}
+                  employees={employees}
+                />
+              }
             />
-          }
-        />
-        <Route path="/employees" element={<AdminEmployees />} />
-        <Route path="/teams" element={<AdminTeams />} />
-        <Route path="/projects" element={<AdminProjects />} />
-        <Route path="/leaves" element={<AdminLeaves />} />
-      </Routes>
+            <Route path="/employees" element={<AdminEmployees />} />
+            <Route path="/teams" element={<AdminTeams />} />
+            <Route path="/projects" element={<AdminProjects />} />
+            <Route path="/leaves" element={<AdminLeaves />} />
+          </Routes>
+        </main>
+      </div>
     </BrowserRouter>
 
     // <div>
